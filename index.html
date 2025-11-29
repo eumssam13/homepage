@@ -1,41 +1,595 @@
-[화면 구성: 홈페이지 레이아웃]
-Hero:
-- 제 이름, 학교, 한 줄 소개가 크게 보이게 해주세요.
-  (예: 목포옥암중학교 교사 이인선 / AI & 에듀테크 기반 음악교육)
-- 오른쪽에는 제 얼굴 사진이 보이게 해 주세요.
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>목포옥암중학교 교사 이인선 | AI &amp; 에듀테크 기반 음악 수업</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --mint: #bdf6ea;
+      --mint-soft: #e8fbf7;
+      --pink: #ffc7e5;
+      --pink-soft: #ffe8f5;
+      --deep: #28354a;
+      --text: #333333;
+      --white: #ffffff;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.08);
+      --radius-xl: 24px;
+    }
 
-About:
-- “나는 어떤 선생님인가요?”를 소개하는 짧은 글 2~3문단 정도 넣어 주세요.
-- 교육 철학이 느껴지면 좋겠습니다. (예: 교사와 학생 모두가 행복한 음악)
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+        "Noto Sans KR", sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top left, var(--mint-soft), #ffffff 50%, var(--pink-soft));
+      min-height: 100vh;
+      line-height: 1.6;
+    }
 
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
+    /* Layout */
 
-Contact:
-- “강의·연수·컨설팅 문의는 이메일로 연락 주세요.” 같은 문장을 써 주세요.
-- 이메일 버튼을 하나 만들어 주세요.
-  - 버튼 글자: `eumssam13@gmail.com`  
+    .page-wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+    }
 
-Footer:
-- 맨 아래에 짧은 문구와 연도를 넣어 주세요.
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 16px;
+    }
 
+    .logo-text {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--deep);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-Hero: 목포옥암중학교 교사 이인선 / AI &에듀테크 기반 음악 수업업
-About: 제 철학은 교사와 학생 모두가 즐거운 음악 수업 입니다. 
+    .logo-icon {
+      font-size: 22px;
+    }
 
+    nav a {
+      font-size: 14px;
+      font-weight: 500;
+      margin-left: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    }
 
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(0, 0, 0, 0.04);
+      transform: translateY(-1px);
+    }
 
-[홈페이지 내용: 아래 작성한 내용을 토대로 홈페이지를 구성해주세요]
-다양한 음악 경험을 하는 음악 수업: 서양음악과 국악이론, 다양한 악기 수업(피아노, 우쿨렐레, 칼림바, 붐웨커, 오르골 등), 가라지밴드, 구글 뮤직랩을 통한 창작 수업
-지역사회와 연계한 음악 동아리를 통해 버스킹: 밴드, 댄스 동아리, 오케스트라 동아리
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
 
+    section {
+      position: relative;
+    }
 
-[첨부파일: index.html에서 아래 파일 이름을 그대로 사용할 수 있게 해 주세요. 이 파일들은 깃허브 레포지토리에 같이 올릴 예정입니다.]
-박보검.png
+    /* Hero */
 
-[디자인]
-피아노, 오케스트라 
-민트색, 핑크색
-행복하고 즐거운 음악 시간을 연상시키는 문구와 이미지를 많이 넣어서 만들어주세요.
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 32px 28px;
+      border-radius: 32px;
+      background: linear-gradient(120deg, var(--mint-soft), var(--pink-soft));
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
 
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.4);
+      top: -80px;
+      right: -60px;
+      filter: blur(3px);
+      opacity: 0.7;
+      pointer-events: none;
+    }
 
+    .hero-left {
+      flex: 1.3;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--deep);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--deep);
+      margin-bottom: 4px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      font-weight: 600;
+      color: #445268;
+      margin-bottom: 14px;
+    }
+
+    .hero-tagline {
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .hero-highlight {
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 9px 14px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .hero-highlight span.icon {
+      font-size: 18px;
+    }
+
+    .hero-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .hero-pill {
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px dashed rgba(0, 0, 0, 0.05);
+    }
+
+    .hero-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .photo-card {
+      position: relative;
+      padding: 12px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top, var(--mint), var(--pink));
+      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .photo-ring {
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      padding: 6px;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-ring img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .floating-note {
+      position: absolute;
+      bottom: 8px;
+      left: -6px;
+      padding: 6px 10px;
+      font-size: 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .floating-note span.icon {
+      font-size: 16px;
+    }
+
+    /* Sections */
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--deep);
+      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title .emoji {
+      font-size: 22px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: var(--radius-xl);
+      padding: 22px 22px 20px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .section-intro {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 14px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 20px;
+    }
+
+    .about-text p {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-pill-group {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .about-pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(189, 246, 234, 0.5);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .about-side {
+      font-size: 13px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(189, 246, 234, 0.8), rgba(255, 199, 229, 0.85));
+      color: #333;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .about-side-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .about-list {
+      margin-left: 16px;
+      margin-top: 4px;
+    }
+
+    .about-list li {
+      margin-bottom: 4px;
+    }
+
+    /* Contact */
+
+    .contact-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .contact-text {
+      font-size: 14px;
+    }
+
+    .email-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--mint), var(--pink));
+      border: none;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--deep);
+      cursor: pointer;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.15);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .email-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
+    }
+
+    .email-button span.icon {
+      font-size: 16px;
+    }
+
+    /* Footer */
+
+    footer {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(0, 0, 0, 0.1);
+      font-size: 12px;
+      color: #666;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    footer .footer-right {
+      font-style: italic;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        flex-direction: column-reverse;
+        padding: 22px 18px;
+      }
+
+      .photo-ring {
+        width: 200px;
+        height: 200px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-side {
+        order: -1;
+      }
+
+      .contact-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .email-button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <header>
+      <div class="logo-text">
+        <span class="logo-icon">🎹</span>
+        행복한 음악 시간, 이인선
+      </div>
+      <nav>
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section id="hero" class="hero">
+        <div class="hero-left">
+          <div class="hero-badge-row">
+            <div class="badge">🎶 목포옥암중학교 음악 교사</div>
+            <div class="badge">🤖 AI &amp; 에듀테크 기반 수업</div>
+          </div>
+          <h1 class="hero-title">목포옥암중학교 교사 이인선</h1>
+          <div class="hero-subtitle">AI &amp; 에듀테크 기반 음악 수업</div>
+          <p class="hero-tagline">
+            제 철학은 <strong>교사와 학생 모두가 즐거운 음악 수업</strong>입니다.<br />
+            피아노와 오케스트라, 국악과 디지털 음악까지<br />
+            다양한 경험 속에서 학생들의 눈빛이 반짝이는 순간을 함께 만듭니다.
+          </p>
+
+          <div class="hero-highlight">
+            <span class="icon">✨</span>
+            <span>오늘도 행복하고 즐거운 음악 시간으로 교실을 채웁니다.</span>
+          </div>
+
+          <div class="hero-pill-row">
+            <div class="hero-pill">🎹 피아노 · 우쿨렐레 · 칼림바</div>
+            <div class="hero-pill">🎻 오케스트라 · 밴드 · 댄스 동아리</div>
+            <div class="hero-pill">💻 가라지밴드 · 구글 뮤직랩 창작</div>
+            <div class="hero-pill">🏙️ 지역사회 버스킹 연계</div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="photo-card">
+            <div class="photo-ring">
+              <!-- 첨부한 파일명을 그대로 사용합니다 -->
+              <img src="박보검.png" alt="교사 이인선 프로필 사진" />
+            </div>
+            <div class="floating-note">
+              <span class="icon">🎼</span>
+              <span>행복한 음악 수업, 함께 만들어요!</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about">
+        <h2 class="section-title">
+          <span class="emoji">🎵</span>
+          나는 어떤 선생님인가요?
+        </h2>
+        <div class="card">
+          <p class="section-intro">
+            음악 시간은 단순히 악보를 배우는 시간이 아니라, <strong>자신을 표현하고 서로를 이해하는 시간</strong>이라고
+            믿습니다.
+          </p>
+
+          <div class="about-grid">
+            <div class="about-text">
+              <p>
+                안녕하세요, 목포옥암중학교에서 음악을 가르치는 이인선입니다. 저는 학생들이
+                <strong>“음악 시간만큼은 정말 즐겁다.”</strong>라고 느낄 수 있는 교실을 만들고자 합니다. 그래서
+                정답을 맞히는 수업보다, 마음껏 실수하고 웃고, 함께 소리를 내며 성장하는 수업을 꿈꿉니다.
+              </p>
+              <p>
+                제 철학은 <strong>교사와 학생 모두가 행복한 음악 수업</strong>입니다. 교사가 행복해야 그 에너지가
+                학생에게 전해지고, 학생이 즐거워야 교실 전체의 분위기가 달라집니다. 서로의 눈을 보며 호흡을 맞추는
+                오케스트라처럼, 저는 학생 한 명 한 명의 목소리를 존중하고, 함께 어우러지는 수업을 만들어 갑니다.
+              </p>
+              <p>
+                수업에서는 서양음악과 국악 이론을 바탕으로, 피아노·우쿨렐레·칼림바·붐웨커·오르골 등
+                <strong>다양한 악기 경험</strong>을 제공합니다. 또한 가라지밴드와 구글 뮤직랩을 활용해 학생들이 직접
+                곡을 만들고, 자신만의 사운드를 찾아가는 <strong>AI &amp; 에듀테크 기반 창작 수업</strong>을
+                진행합니다. 교실에서 끝나지 않고, 지역사회와 연계한 밴드·댄스·오케스트라 동아리 버스킹을 통해
+                학생들이 무대 위에서 스스로를 더욱 빛낼 수 있도록 돕고 있습니다.
+              </p>
+
+              <div class="about-pill-group">
+                <div class="about-pill">학생 중심·경험 중심 수업</div>
+                <div class="about-pill">실패도 환영하는 음악 교실</div>
+                <div class="about-pill">기초 이론 + 창작 활동의 균형</div>
+                <div class="about-pill">교실을 넘어 지역사회까지 확장</div>
+              </div>
+            </div>
+
+            <aside class="about-side">
+              <div class="about-side-title">
+                <span>🎹 행복한 음악 시간을 위한 수업 구성</span>
+              </div>
+              <ul class="about-list">
+                <li>서양음악 &amp; 국악 이론으로 기초 다지기</li>
+                <li>피아노, 우쿨렐레, 칼림바, 붐웨커, 오르골 등 악기 체험</li>
+                <li>가라지밴드·구글 뮤직랩을 활용한 디지털 작곡 &amp; 편집</li>
+                <li>밴드·댄스·오케스트라 동아리 운영 및 버스킹 참여</li>
+                <li>AI &amp; 에듀테크 도구로 개별 맞춤형 피드백 제공</li>
+              </ul>
+              <p style="margin-top:8px;">
+                🎶 목표는 단 하나, <strong>“음악 시간에 나다운 나를 마음껏 표현할 수 있도록 돕는 것”</strong>입니다.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact">
+        <h2 class="section-title">
+          <span class="emoji">📩</span>
+          Contact
+        </h2>
+        <div class="card">
+          <div class="contact-content">
+            <p class="contact-text">
+              강의·연수·컨설팅 문의는 이메일로 연락 주세요.<br />
+              AI &amp; 에듀테크 기반 음악 수업, 동아리 운영, 버스킹 프로그램 등에 대해<br />
+              함께 고민하고 나누는 협업을 언제든 환영합니다.
+            </p>
+
+            <a class="email-button" href="mailto:eumssam13@gmail.com">
+              <span class="icon">✉️</span>
+              <span>eumssam13@gmail.com</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© 2025 이인선. 행복하고 즐거운 음악 수업, 오늘도 계속됩니다.</div>
+      <div class="footer-right">🎻 피아노와 오케스트라로 물들이는 따뜻한 학교 음악 시간</div>
+    </footer>
+  </div>
+</body>
+</html>
